@@ -1,0 +1,26 @@
+{
+  "name": "wikistack",
+  "version": "1.0.0",
+  "description": "Wikistack - Sequelize workshop",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -e html,js,css ./app.js"
+  },
+  "keywords": [
+    "Sequelize"
+  ],
+  "author": "Kaisin Li, Betty Lin",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "morgan": "^1.8.1",
+    "nunjucks": "^3.0.0",
+    "pg": "^6.1.5",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
