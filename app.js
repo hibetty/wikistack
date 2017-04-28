@@ -4,6 +4,7 @@ var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 var app = express();
 var models = require('./models');
+var routes = require('./routes');
 
 //serve static files
 app.use(express.static('public'));
