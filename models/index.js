@@ -6,6 +6,8 @@ var Page =  db.define('page', {
   urlTitle: { type: Sequelize.STRING, allowNull: false },
   content: { type: Sequelize.TEXT, allowNull: false },
   status: Sequelize.ENUM('open', 'closed')
+}, {
+  getterMethods: { route: function(){ return '/wiki/' + this.urlTitle + '/'; }}
 });
 
 var User =  db.define('user', {
