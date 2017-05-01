@@ -19,10 +19,10 @@ wikiRoutes.post('/', function(req, res, next){
     content: formContent
   });
 
-  User.findOne({
-    attributes: ['name'],
-    where: //ADD STUFF HERE TO FIND IF USER EXISTS
-  });
+  User.findOrCreate({where: {name: formAuthor, email: formEmail}})
+    .spread(function(user){
+      page.setAuthor(user);
+    });
 
   page.save()
   .then(function(savedPage){
@@ -36,10 +36,14 @@ wikiRoutes.get('/add', function(req, res, next){
 
 wikiRoutes.get('/:urlTitle', function(req, res, next){
   Page.findOne({
-    where: {urlTitle: req.params.urlTitle}
+    where: {urlTitle: req.params.urlTitle},
+    include: [ {
+      model: User, as: 'author'
+    }]
   })
   .then(function(foundPage){
-    res.render('wikipage', { urlTitle: foundPage.urlTitle, title: foundPage.title, content: foundPage.content });
+    console.log(foundPage);
+    res.render('wikipage', { urlTitle: foundPage.urlTitle, title: foundPage.title, content: foundPage.content, author: foundPage.author });
   })
   .catch(next);
 });

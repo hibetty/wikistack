@@ -16,7 +16,6 @@ routes.get('/', function(req, res, next){
     attributes: ['urlTitle', 'title']
   })
   .then(function(pages){
-    console.log(pages);
     res.render('index', {pages: pages});
   })
   .catch(next);
