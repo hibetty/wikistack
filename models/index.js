@@ -7,7 +7,14 @@ var Page =  db.define('page', {
   content: { type: Sequelize.TEXT, allowNull: false },
   status: Sequelize.ENUM('open', 'closed')
 }, {
-  getterMethods: { route: function(){ return '/wiki/' + this.urlTitle + '/'; }}
+  getterMethods: { route: function(){ return '/wiki/' + this.urlTitle + '/'; }},
+  hooks: { beforeValidate: function (page, options) {
+    if (page.title) {
+      page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+    } else {
+      page.urlTitle = Math.random().toString(36).substring(2, 7);
+    }
+  }}
 });
 
 var User =  db.define('user', {

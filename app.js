@@ -6,8 +6,12 @@ var app = express();
 var models = require('./models');
 var routes = require('./routes');
 
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 //serve static files
 app.use(express.static('public'));
+app.use('/', routes);
 
 //logging middleware
 app.use(morgan('dev'));
@@ -25,7 +29,3 @@ models.db.sync({force: true})
     });
   })
   .catch(console.error);
-
-app.get('/', function(req, res, next){
-  res.render('index');
-});
